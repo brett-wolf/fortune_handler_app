@@ -7,7 +7,7 @@ $FilesToExclude = @(".funcignore",".gitignore")
 $FunctionFilesToZip = Get-ChildItem -Path $FunctionAppFolder -Exclude $FilesToExclude
 Compress-Archive -Path $FunctionFilesToZip -DestinationPath $ZipDestination -CompressionLevel Fastest
 
-Connect to azure account and deploy zipped function code
+#Connect to azure account and deploy zipped function code
 Connect-AzAccount
 Publish-AzWebapp -ResourceGroupName rg-fortune-handler -Name func-fortune-handler -ArchivePath $ZipDestination
 
