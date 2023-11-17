@@ -53,3 +53,9 @@ The following steps are required to set up application in a new azure instance
 4. There are two powershell scripts within the /deploy folder 
     FunctionAppDeploy.ps1 - This will zip up the function app code and upload to azure
     WebAppDeploy.ps1 - This will zip up the website and deploy to azure
+
+-------------View the Application-------------
+The website is currently deployed to azure at : https://web-fortune-handler.azurewebsites.net/
+The function app can be reached at : https://func-fortune-handler.azurewebsites.net/api/fortune
+                                     https://func-fortune-handler.azurewebsites.net/api/healthcheck
+                                    
