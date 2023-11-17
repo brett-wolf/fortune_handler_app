@@ -15,16 +15,6 @@ resource "azurerm_linux_function_app" "fa_fortune" {
 
   app_settings = {
     WEBSITE_RUN_FROM_PACKAGE = 0
-    #FUNCTIONS_WORKER_RUNTIME       = "python"
-      #WEBSITES_MOUNT_ENABLED                = 1
-      #WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-      #FUNCTIONS_WORKER_RUNTIME              = "python"
-      #APPINSIGHTS_INSTRUMENTATIONKEY        = "${azurerm_application_insights.ai_fortune.instrumentation_key}"
-      #APPLICATIONINSIGHTS_CONNECTION_STRING = "InstrumentationKey=${azurerm_application_insights.ai_fortune.instrumentation_key};IngestionEndpoint=https://eastus-0.in.applicationinsights.azure.com/"
-      #AzureWebJobsStorage = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.storage_account.name};AccountKey=${azurerm_storage_account.storage_account.primary_access_key}"
-      #SCM_DO_BUILD_DURING_DEPLOYMENT = true
-      #ENABLE_ORYX_BUILD = true
-      #SCM_DO_BUILD_DURING_DEPLOYMENT = true
   }
 
   site_config {
