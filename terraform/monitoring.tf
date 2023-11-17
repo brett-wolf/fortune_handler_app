@@ -62,3 +62,27 @@ resource "azurerm_monitor_metric_alert" "func_metric_health_alert" {
   }
 }
 
+# Set up an alert rule on the health check status of the web app
+resource "azurerm_monitor_metric_alert" "web_metric_health_alert" {
+  name                 = "web-healthcheck-metric-alert"
+  resource_group_name  = azurerm_resource_group.rg_fortune.name
+  description          = "Action will be triggered when the health of the web app is < 100%"
+  scopes               = [azurerm_linux_web_app.wa_fortune.id]
+  depends_on           = [azurerm_resource_group.rg_fortune,
+                          azurerm_service_plan.asp_fortune]
+  target_resource_type = "Microsoft.Web/sites"
+  severity             = 0
+  frequency            = "PT1M"
+
+  criteria {
+    metric_namespace = "microsoft.web/sites"
+    metric_name      = "HealthCheckStatus"
+    aggregation      = "Average"
+    operator         = "LessThan"
+    threshold        = 100
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.action_group_fortune.id
+  }
+}

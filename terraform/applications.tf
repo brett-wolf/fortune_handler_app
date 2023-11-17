@@ -70,6 +70,36 @@ resource "azurerm_function_app_function" "func_fortune" {
   })
 }
 
+# Create the health check function within the function app
+resource "azurerm_function_app_function" "func_health" {
+  depends_on = [ azurerm_linux_function_app.fa_fortune ]
+  name = "HealthCheck"
+  function_app_id = azurerm_linux_function_app.fa_fortune.id
+  language = "Python"
+  test_data = jsonencode({
+    "name" = "Azure"
+  })
+  config_json = jsonencode({
+    "bindings" = [
+      {
+        "authLevel" = "anonymous"
+        "direction" = "in"
+        "methods" = [
+          "get",
+          "post",
+        ]
+        "name" = "req"
+        "type" = "httpTrigger"
+      },
+      {
+        "direction" = "out"
+        "name"      = "$return"
+        "type"      = "http"
+      },
+    ]
+  })
+}
+
 # Create web app for the static web page
 resource "azurerm_linux_web_app" "wa_fortune" {
   name                  = "web-${var.prefix}"
